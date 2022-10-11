@@ -1,0 +1,52 @@
+% azmath/derivatives.satyh
+% Derivatives
+
+@require: math
+
+module PhysicsDerivatives : sig
+
+  direct \dd   : [math?; math;] math-cmd
+  direct \var  : [math?; math;] math-cmd
+
+  direct \dv   : [math?; math?; math;] math-cmd
+  direct \pdv  : [math?; math?; math;] math-cmd
+  direct \fdv  : [math?; math?; math;] math-cmd
+
+  direct \pdv2 : [math?; math; math;] math-cmd
+
+end = struct
+
+  % TODO: modify to closer expression
+  let-math \dd ?:n x =
+    match n with
+    | None    -> ${\mathop{\mathrm{d} #x}}
+    | Some(n) -> ${\mathop{\mathrm{d}^#n #x}}
+
+  let-math \var ?:n x =
+    match n with
+    | None    -> ${\mathop{\delta #x}}
+    | Some(n) -> ${\mathop{\delta^#n #x}}
+
+  let derivation char ?:f ?:n x =
+    match n with
+    | None -> (
+      match f with
+      | None    -> ${\frac{#char}{#char #x}}
+      | Some(f) -> ${\frac{#char #f}{#char #x}}
+    )
+    | Some(n) -> (
+      match f with
+      | None    -> ${\frac{#char^#n}{#char #x^#n}}
+      | Some(f) -> ${\frac{#char^#n #f}{#char #x^#n}}
+    )
+
+  let-math \dv = derivation ${\mathbf{d}}
+  let-math \pdv = derivation ${\partial}
+  let-math \fdv = derivation ${\delta}
+
+  let-math \pdv2 ?:f x y =
+    match f with
+    | None    -> ${\frac{\partial^2}{\partial #x \partial #y}}
+    | Some(f) -> ${\frac{\partial^2 #f}{\partial #x \partial #y}}
+
+end
