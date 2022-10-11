@@ -1,0 +1,29 @@
+% azmath/bracings.satyh
+% Automatic bracing
+% Dirac bra-ket notation
+
+@require: math
+
+module PhysicsBracing : sig
+
+  direct \order : [math;] math-cmd
+  direct \bra : [math;] math-cmd
+  direct \ket : [math;] math-cmd
+
+end = struct
+
+  let-math \order f = ${\mathcal{O}\paren{#f}}
+  let-math \comm a b = ${}
+
+  let-math \bra =
+    math-paren (Math.angle-left 0.5pt) Math.abs-right
+
+  let-math \ket =
+    math-paren Math.abs-left (Math.angle-right 0.5pt)
+
+  let-math \braket lst =
+    math-paren-with-middle
+      (Math.angle-left 0.5pt) (Math.angle-right 0.5pt)
+      (Math.abs-right) lst
+
+end
