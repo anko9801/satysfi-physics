@@ -1,0 +1,33 @@
+% physics/quick-text.satyh
+% Quick quad text
+
+@require: math
+
+module Physics : sig
+
+end = struct
+
+  % let-math \qq text = ${#text}
+  % let-math \qc = ${,}
+  % let-math \qcc = ${c.c.}
+  % let-math \qif = ${if}
+  % let-math \qthen = ${}
+  % let-math \qelse = ${}
+  % let-math \qotherwise = ${}
+  % let-math \qunless = ${}
+  % let-math \qgiven = ${}
+  % let-math \qusing = ${}
+  % let-math \qassume = ${}
+  % let-math \qsince = ${}
+  % let-math \qlet = ${}
+  % let-math \qfor = ${}
+  % let-math \qall = ${}
+  % let-math \qeven = ${}
+  % let-math \qodd = ${}
+  % let-math \qinteger = ${}
+  % let-math \qand = ${}
+  % let-math \qor = ${}
+  % let-math \qas = ${}
+  % let-math \qin = ${}
+
+end
