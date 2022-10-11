@@ -1,0 +1,26 @@
+% physics/vector.satyh
+% Vector notation
+
+@require: math
+
+module PhysicsVector : sig
+
+  direct \vb   : [math;] math-cmd
+
+  direct \grad : [math;] math-cmd
+  direct \div  : [math;] math-cmd
+  direct \rot  : [math;] math-cmd
+  direct \curl : [math;] math-cmd
+  direct \laplacian : [math;] math-cmd
+
+end = struct
+
+  let-math \vb v = ${\mathbf{#v}}
+
+  let-math \grad m = ${\nabla#m}
+  let-math \div  m = ${\nabla\cdot#m}
+  let-math \rot  m = ${\nabla\times#m}
+  let-math \curl m = ${\nabla\times#m}
+  let-math \laplacian m = ${\nabla^2#m}
+
+end
