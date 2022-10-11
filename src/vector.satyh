@@ -2,25 +2,112 @@
 % Vector notation
 
 @require: math
+@require: azmath/azmath
 
 module PhysicsVector : sig
 
-  direct \vb   : [math;] math-cmd
+  direct \vectorbold  : [math;] math-cmd
+  direct \vb          : [math;] math-cmd
+  direct \vectorarrow : [math;] math-cmd
+  direct \va          : [math;] math-cmd
+  direct \vectorunit  : [math;] math-cmd
+  direct \vu          : [math;] math-cmd
 
-  direct \grad : [math;] math-cmd
-  direct \div  : [math;] math-cmd
-  direct \rot  : [math;] math-cmd
-  direct \curl : [math;] math-cmd
-  direct \laplacian : [math;] math-cmd
+  direct \dotproduct   : [] math-cmd
+  direct \vdot         : [] math-cmd
+  direct \crossproduct : [] math-cmd
+  direct \cross        : [] math-cmd
+  direct \cp           : [] math-cmd
+
+  direct \vbnabla : [] math-cmd
+  direct \vanabla : [] math-cmd
+
+  direct \gradient   : [math;] math-cmd
+  direct \grad       : [math;] math-cmd
+  direct \divergence : [math;] math-cmd
+  direct \div        : [math;] math-cmd
+  direct \rotation   : [math;] math-cmd
+  direct \rot        : [math;] math-cmd
+  direct \curl       : [math;] math-cmd
+  direct \laplacian  : [math;] math-cmd
 
 end = struct
+  % wait for azmath's release
+  % let accent-scheme str-acc thickness inner =
+  %   let accent = math-char MathOrd str-acc in
+  %   ${#inner#accent}
 
-  let-math \vb v = ${\mathbf{#v}}
+  let max-len l1 l2 = if l1 >' l2 then l1 else l2
 
-  let-math \grad m = ${\nabla#m}
-  let-math \div  m = ${\nabla\cdot#m}
-  let-math \rot  m = ${\nabla\times#m}
-  let-math \curl m = ${\nabla\times#m}
-  let-math \laplacian m = ${\nabla^2#m}
+  % アクセントの付いた文字を返す．
+  % wid-acc-r: font-size に対するアクセントの横方向の幅の割合．
+  % acc-thickness-r: font-size に対するアクセントの高さ方向の厚みの割合．
+  let accent-scheme str-acc wid-acc-r acc-thickness-r shift-offset-opt inner =
+    let embedf ctx =
+      let accent = math-char MathOrd str-acc in
+      let ib-inner = embed-math ctx inner in
+      let ib-accent = embed-math ctx accent in
+      let (wid-in, ht-in, dp-in) = get-natural-metrics ib-inner in
+      let (_, ht-acc, _) = get-natural-metrics ib-accent in
+
+      let offset-acc = ht-acc -' (ctx |> get-font-size) *' acc-thickness-r in
+      let wid-acc = (ctx |> get-font-size) *' wid-acc-r in
+      let shift-offset = (ctx |> get-font-size) *' (shift-offset-opt |> Option.from 0.) in
+      let ht = max-len ht-in ht-acc in
+      let dp = dp-in in
+
+      let xoffset =
+        if wid-in >' wid-acc
+        then % 右揃え
+          wid-in
+        else % 中央揃え
+          wid-in +' (wid-acc -' wid-in) *' 0.5
+      in
+
+      let grlst (x, y) =
+        [
+          draw-text (x, y) ib-inner;
+          draw-text (x +' xoffset +' shift-offset, y +' ht-in -' offset-acc) ib-accent;
+        ]
+      in
+
+      math-graphics MathOrd wid-in ht dp grlst
+    in
+
+    math-in-math MathOrd embedf
+  let-math \vec    ?:shift inner = accent-scheme ` ⃗` 0.5 0.28 shift inner
+
+  let vectorbold v = ${\mathbf{#v}}
+  let-math \vectorbold  = vectorbold
+  let-math \vb          = vectorbold
+  let vectorarrow v = ${\vec{\mathbf{#v}}}
+  let-math \vectorarrow = vectorarrow
+  let-math \va          = vectorarrow
+  let vectorunit v = ${\mathbf{\hat{#v}}}
+  let-math \vectorunit  = vectorunit
+  let-math \vu          = vectorunit
+
+  let dotproduct         = ${\mathbf{\cdot}}
+  let-math \dotproduct   = dotproduct
+  let-math \vdot         = dotproduct
+  let crossproduct       = ${\mathbf{\times}}
+  let-math \crossproduct = crossproduct
+  let-math \cross        = crossproduct
+  let-math \cp           = crossproduct
+
+  let-math \vbnabla = ${\mathbf{\nabla}}
+  let-math \vanabla = ${\vec{\mathbb{\nabla}}}
+
+  let gradient f = ${\vbnabla#f}
+  let-math \gradient = gradient
+  let-math \grad     = gradient
+  let divergence f = ${\vbnabla\vdot#f}
+  let-math \divergence = divergence
+  let-math \div        = divergence
+  let rotation f = ${\vbnabla\crossproduct#f}
+  let-math \rotation = rotation
+  let-math \rot      = rotation
+  let-math \curl     = rotation
+  let-math \laplacian f = ${\vbnabla^2#f}
 
 end
