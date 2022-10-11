@@ -1,0 +1,57 @@
+% physics/operators.satyh
+% Operators
+
+@require: math
+
+module PhysicsOperators : sig
+
+  direct \sin : [] math-cmd
+
+  direct \exp : [math;] math-cmd
+  direct \log : [math;] math-cmd
+  direct \ln  : [math;] math-cmd
+  direct \det : [math;] math-cmd
+
+end = struct
+
+  % TODO: modify to closer expression
+  let-math \operatorname op = ${\mathop{\mathrm{#op}}}
+
+  let-math \sin = ${\operatorname{sin}}
+  let-math \cos = ${\operatorname{cos}}
+  let-math \tan = ${\operatorname{tan}}
+  let-math \csc = ${\operatorname{csc}}
+  let-math \sec = ${\operatorname{sec}}
+  let-math \cot = ${\operatorname{cot}}
+  let-math \sinh = ${\operatorname{sinh}}
+  let-math \cosh = ${\operatorname{cosh}}
+  let-math \tanh = ${\operatorname{tanh}}
+  let-math \arcsin = ${\operatorname{arcsin}}
+  let-math \arccos = ${\operatorname{arccos}}
+  let-math \arctan = ${\operatorname{arctan}}
+  let-math \arccsc = ${\operatorname{arccsc}}
+  let-math \arcsec = ${\operatorname{arcsec}}
+  let-math \arccot = ${\operatorname{arccot}}
+  let-math \asin = ${\operatorname{asin}}
+  let-math \acos = ${\operatorname{acos}}
+  let-math \atan = ${\operatorname{atan}}
+  let-math \acsc = ${\operatorname{acsc}}
+  let-math \asec = ${\operatorname{asec}}
+  let-math \acot = ${\operatorname{acot}}
+
+  let-math \exp f = ${\operatorname{exp}\paren{#f}}
+  let-math \log f = ${\operatorname{log}\paren{#f}}
+  let-math \ln f = ${\operatorname{ln}\paren{#f}}
+  let-math \det m = ${\operatorname{det}\paren{#m}}
+  let-math \Pr p = ${\operatorname{Pr}\paren{#p}}
+
+  let-math \tr = ${\operatorname{tr}}
+  let-math \Tr = ${\operatorname{Tr}}
+  let-math \rank = ${\operatorname{rank}}
+  let-math \erf = ${\operatorname{erf}}
+  let-math \Res = ${\operatorname{Res}}
+  let-math \PV = ${\operatorname{P.V.}}
+  let-math \Re f = ${\operatorname{Re}\brace{#f}}
+  let-math \Im f = ${\operatorname{Im}\brace{#f}}
+
+end
