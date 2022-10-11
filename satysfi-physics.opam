@@ -1,0 +1,27 @@
+opam-version: "2.0"
+name: "satysfi-physics"
+version: "0.0.1"
+synopsis: "A SATySFi package to make typesetting equations for physics simpler, faster, and more human-readable."
+description: """A SATySFi package to make typesetting equations for physics simpler, faster, and more human-readable."""
+
+maintainer: "anko9801 <daiusa3@icloud.com>"
+authors: "anko9801 <daiusa3@icloud.com>"
+license: "MIT"
+homepage: "https://github.com/anko9801/satysfi-physics"
+bug-reports: "https://github.com/anko9801/satysfi-physics/issues"
+dev-repo: "git+https://github.com/anko9801/satysfi-physics.git"
+
+depends: [
+  "satysfi" {>= "0.0.6" & < "0.0.7"}
+  "satyrographos" {>= "0.0.2" & < "0.0.3"}
+  "satysfi-dist"
+  "satysfi-base" {>= "1.4.0" }
+]
+build: [ ]
+install: [
+  ["satyrographos" "opam" "install"
+   "-name" "physics"
+   "-prefix" "%{prefix}%"
+   "-script" "%{build}%/Satyristes"]
+]
+
