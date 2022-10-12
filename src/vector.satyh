@@ -6,6 +6,8 @@
 
 module PhysicsVector : sig
 
+  direct \vec         : [float?; math;] math-cmd
+
   direct \vectorbold  : [math;] math-cmd
   direct \vb          : [math;] math-cmd
   direct \vectorarrow : [math;] math-cmd
@@ -32,7 +34,7 @@ module PhysicsVector : sig
   direct \laplacian  : [math;] math-cmd
 
 end = struct
-  % wait for azmath's release
+  % TODO: Wait for azmath's release.
   % let accent-scheme str-acc thickness inner =
   %   let accent = math-char MathOrd str-acc in
   %   ${#inner#accent}
