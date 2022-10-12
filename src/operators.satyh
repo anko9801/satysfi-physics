@@ -5,53 +5,233 @@
 
 module PhysicsOperators : sig
 
-  direct \sin : [] math-cmd
+  direct \sine      : [math?; unit;] math-cmd
+  direct \sin       : [math?; unit;] math-cmd
+  direct \cosine    : [math?; unit;] math-cmd
+  direct \cos       : [math?; unit;] math-cmd
+  direct \tangent   : [math?; unit;] math-cmd
+  direct \tan       : [math?; unit;] math-cmd
+  direct \cosecant  : [math?; unit;] math-cmd
+  direct \csc       : [math?; unit;] math-cmd
+  direct \secant    : [math?; unit;] math-cmd
+  direct \sec       : [math?; unit;] math-cmd
+  direct \cotangent : [math?; unit;] math-cmd
+  direct \cot       : [math?; unit;] math-cmd
 
-  direct \exp : [math;] math-cmd
-  direct \log : [math;] math-cmd
-  direct \ln  : [math;] math-cmd
-  direct \det : [math;] math-cmd
+  direct \arcsine      : [math?; unit;] math-cmd
+  direct \arcsin       : [math?; unit;] math-cmd
+  direct \arccosine    : [math?; unit;] math-cmd
+  direct \arccos       : [math?; unit;] math-cmd
+  direct \arctangent   : [math?; unit;] math-cmd
+  direct \arctan       : [math?; unit;] math-cmd
+  direct \arccosecant  : [math?; unit;] math-cmd
+  direct \arccsc       : [math?; unit;] math-cmd
+  direct \arcsecant    : [math?; unit;] math-cmd
+  direct \arcsec       : [math?; unit;] math-cmd
+  direct \arccotangent : [math?; unit;] math-cmd
+  direct \arccot       : [math?; unit;] math-cmd
+
+  direct \asine      : [math?; unit;] math-cmd
+  direct \asin       : [math?; unit;] math-cmd
+  direct \acosine    : [math?; unit;] math-cmd
+  direct \acos       : [math?; unit;] math-cmd
+  direct \atangent   : [math?; unit;] math-cmd
+  direct \atan       : [math?; unit;] math-cmd
+  direct \acosecant  : [math?; unit;] math-cmd
+  direct \acsc       : [math?; unit;] math-cmd
+  direct \asecant    : [math?; unit;] math-cmd
+  direct \asec       : [math?; unit;] math-cmd
+  direct \acotangent : [math?; unit;] math-cmd
+  direct \acot       : [math?; unit;] math-cmd
+
+  direct \hypsine      : [math?; unit;] math-cmd
+  direct \sinh         : [math?; unit;] math-cmd
+  direct \hypcosine    : [math?; unit;] math-cmd
+  direct \cosh         : [math?; unit;] math-cmd
+  direct \hyptangent   : [math?; unit;] math-cmd
+  direct \tanh         : [math?; unit;] math-cmd
+  direct \hypcosecant  : [math?; unit;] math-cmd
+  direct \csch         : [math?; unit;] math-cmd
+  direct \hypsecant    : [math?; unit;] math-cmd
+  direct \sech         : [math?; unit;] math-cmd
+  direct \hypcotangent : [math?; unit;] math-cmd
+  direct \coth         : [math?; unit;] math-cmd
+
+  direct \exponential : [math?; unit;] math-cmd
+  direct \exp         : [math?; unit;] math-cmd
+  direct \logarithm   : [math?; unit;] math-cmd
+  direct \log         : [math?; unit;] math-cmd
+  direct \naturallogarithm : [math?; unit;] math-cmd
+  direct \ln          : [math?; unit;] math-cmd
+  direct \determinant : [math?; unit;] math-cmd
+  direct \det         : [math?; unit;] math-cmd
+  direct \Probability : [math?; unit;] math-cmd
+  direct \Pr          : [math?; unit;] math-cmd
+  direct \tr          : [math?; unit;] math-cmd
+  direct \Tr          : [math?; unit;] math-cmd
+  direct \Res         : [math?; unit;] math-cmd
 
 end = struct
 
-  % TODO: modify to closer expression
-  let-math \operatorname op = ${\mathop{\mathrm{#op}}}
+  let ord = math-char MathOrd
+  let bin = math-char MathBin
+  let rel = math-char MathRel
+  let op = math-char MathOp
+  let punct = math-char MathPunct
+  let prefix = math-char MathPrefix
 
-  let-math \sin = ${\operatorname{sin}}
-  let-math \cos = ${\operatorname{cos}}
-  let-math \tan = ${\operatorname{tan}}
-  let-math \csc = ${\operatorname{csc}}
-  let-math \sec = ${\operatorname{sec}}
-  let-math \cot = ${\operatorname{cot}}
-  let-math \sinh = ${\operatorname{sinh}}
-  let-math \cosh = ${\operatorname{cosh}}
-  let-math \tanh = ${\operatorname{tanh}}
-  let-math \arcsin = ${\operatorname{arcsin}}
-  let-math \arccos = ${\operatorname{arccos}}
-  let-math \arctan = ${\operatorname{arctan}}
-  let-math \arccsc = ${\operatorname{arccsc}}
-  let-math \arcsec = ${\operatorname{arcsec}}
-  let-math \arccot = ${\operatorname{arccot}}
-  let-math \asin = ${\operatorname{asin}}
-  let-math \acos = ${\operatorname{acos}}
-  let-math \atan = ${\operatorname{atan}}
-  let-math \acsc = ${\operatorname{acsc}}
-  let-math \asec = ${\operatorname{asec}}
-  let-math \acot = ${\operatorname{acot}}
+  let vop-scheme charf s =
+    let mop = charf MathOp s in
+    math-pull-in-scripts MathOp MathOp
+      (fun moptS moptT -> (
+        let m =
+          match moptS with
+          | None     -> mop
+          | Some(mS) -> math-lower mop mS
+        in
+          match moptT with
+          | None     -> m
+          | Some(mT) -> math-upper m mT
+      ))
 
-  let-math \exp f = ${\operatorname{exp}\paren{#f}}
-  let-math \log f = ${\operatorname{log}\paren{#f}}
-  let-math \ln f = ${\operatorname{ln}\paren{#f}}
-  let-math \det m = ${\operatorname{det}\paren{#m}}
-  let-math \Pr p = ${\operatorname{Pr}\paren{#p}}
+  let bigop = vop-scheme math-big-char
+  let vop = vop-scheme math-char
+  let trigop f g =
+    let mop = math-char MathOp f in
+    match g with
+    | None    -> mop
+    | Some(g) -> math-pull-in-scripts MathOp MathOp
+      (fun msub msup -> (
+        let mob =
+          match msub with
+          | None       -> mop
+          | Some(msub) -> math-sub mop msub
+        in
+          match msup with
+          | None       -> math-concat mob g
+          | Some(msup) -> math-concat (math-sup mob msup) g
+      ))
+  let braceop f g =
+    match g with
+    | None    -> math-char MathOp f
+    | Some(g) -> math-concat (math-char MathOp f) ${\paren{#g}}
 
-  let-math \tr = ${\operatorname{tr}}
-  let-math \Tr = ${\operatorname{Tr}}
-  let-math \rank = ${\operatorname{rank}}
-  let-math \erf = ${\operatorname{erf}}
-  let-math \Res = ${\operatorname{Res}}
-  let-math \PV = ${\operatorname{P.V.}}
-  let-math \Re f = ${\operatorname{Re}\brace{#f}}
-  let-math \Im f = ${\operatorname{Im}\brace{#f}}
+  % Operators
+  let-math \tr      = op `tr`
+  let-math \trace   = op `tr`
+  let-math \Tr      = op `Tr`
+  let-math \Trace   = op `Tr`
+  let-math \rank    = op `rank`
+  let-math \erf     = op `erf` % Gauss error function
+  let-math \Residue = op `Res`
+  let-math \Res     = op `Res`
+
+  % let principalvalue a ?:g f =
+  %   match g with
+  %   | None    -> ${\mathcal{P}}
+  %   | Some(g) -> ${\mathcal{P}\mathord{#g}}
+  % let-math \principalvalue ?:g =
+  %   match g with
+  %   | None    -> ${\mathcal{P}}
+  %   | Some(g) -> ${\mathcal{P}\mathord{#g}}
+  % let-math \pv = principalvalue
+  % let-math \PV ?:g =
+  %   match g with
+  %   | None    -> ${\mathrm{P.V.}}
+  %   | Some(g) -> ${\mathrm{P.V.}\mathord{#g}}
+
+  let-math \real ?:g () = braceop `Re` g
+  let-math \Re   ?:g () = braceop `Re` g
+  let-math \imaginary ?:g () = braceop `Im` g
+  let-math \Im        ?:g () = braceop `Im` g
+
+  % Trig function and operator redefinitions
+  let-math \sine      ?:g () = trigop `sin` g
+  let-math \sin       ?:g () = trigop `sin` g
+  let-math \cosine    ?:g () = trigop `cos` g
+  let-math \cos       ?:g () = trigop `cos` g
+  let-math \tangent   ?:g () = trigop `tan` g
+  let-math \tan       ?:g () = trigop `tan` g
+  let-math \cosecant  ?:g () = trigop `csc` g
+  let-math \csc       ?:g () = trigop `csc` g
+  let-math \secant    ?:g () = trigop `sec` g
+  let-math \sec       ?:g () = trigop `sec` g
+  let-math \cotangent ?:g () = trigop `cot` g
+  let-math \cot       ?:g () = trigop `cot` g
+
+  let-math \arcsine      ?:g () = trigop `arcsin` g
+  let-math \arcsin       ?:g () = trigop `arcsin` g
+  let-math \arccosine    ?:g () = trigop `arccos` g
+  let-math \arccos       ?:g () = trigop `arccos` g
+  let-math \arctangent   ?:g () = trigop `arctan` g
+  let-math \arctan       ?:g () = trigop `arctan` g
+  let-math \arccosecant  ?:g () = trigop `arccsc` g
+  let-math \arccsc       ?:g () = trigop `arccsc` g
+  let-math \arcsecant    ?:g () = trigop `arcsec` g
+  let-math \arcsec       ?:g () = trigop `arcsec` g
+  let-math \arccotangent ?:g () = trigop `arccot` g
+  let-math \arccot       ?:g () = trigop `arccot` g
+
+  let-math \asine      ?:g () = trigop `asin` g
+  let-math \asin       ?:g () = trigop `asin` g
+  let-math \acosine    ?:g () = trigop `acos` g
+  let-math \acos       ?:g () = trigop `acos` g
+  let-math \atangent   ?:g () = trigop `atan` g
+  let-math \atan       ?:g () = trigop `atan` g
+  let-math \acosecant  ?:g () = trigop `acsc` g
+  let-math \acsc       ?:g () = trigop `acsc` g
+  let-math \asecant    ?:g () = trigop `asec` g
+  let-math \asec       ?:g () = trigop `asec` g
+  let-math \acotangent ?:g () = trigop `acot` g
+  let-math \acot       ?:g () = trigop `acot` g
+
+  let-math \hypsine      ?:g () = trigop `sinh` g
+  let-math \sinh         ?:g () = trigop `sinh` g
+  let-math \hypcosine    ?:g () = trigop `cosh` g
+  let-math \cosh         ?:g () = trigop `cosh` g
+  let-math \hyptangent   ?:g () = trigop `tanh` g
+  let-math \tanh         ?:g () = trigop `tanh` g
+  let-math \hypcosecant  ?:g () = trigop `csch` g
+  let-math \csch         ?:g () = trigop `csch` g
+  let-math \hypsecant    ?:g () = trigop `sech` g
+  let-math \sech         ?:g () = trigop `sech` g
+  let-math \hypcotangent ?:g () = trigop `coth` g
+  let-math \coth         ?:g () = trigop `coth` g
+
+  let-math \exponential ?:g () = braceop `exp` g
+  let-math \exp         ?:g () = braceop `exp` g
+  let-math \logarithm   ?:g () = trigop  `log` g
+  let-math \log         ?:g () = trigop  `log` g
+  let-math \naturallogarithm ?:g () = trigop `ln` g
+  let-math \ln          ?:g () = trigop  `ln` g
+  let-math \determinant ?:g () = braceop `det` g
+  let-math \det         ?:g () = braceop `det` g
+  let-math \Probability ?:g () = braceop `Pr` g
+  let-math \Pr          ?:g () = braceop `Pr` g
+  let-math \tr          ?:g () = braceop `tr` g
+  let-math \Tr          ?:g () = braceop `tr` g
+  let-math \Res         ?:g () = braceop `Res` g
+
+% \def\arg{\qopname\relax{no}{arg}}
+% \def\deg{\qopname\relax{no}{deg}}
+% \def\det{\qopname\relax n{det}}
+% \def\dim{\qopname\relax{no}{dim}}
+% \def\exp{\qopname\relax{no}{exp}}
+% \def\gcd{\qopname\relax n{gcd}}
+% \def\hom{\qopname\relax{no}{hom}}
+% \def\inf{\qopname\relax n{inf}}
+% \def\injlim{\qopname\relax n{inj\,lim}}
+% \def\ker{\qopname\relax{no}{ker}}
+% \def\lg{\qopname\relax{no}{lg}}
+% \def\lim{\qopname\relax n{lim}}
+% \def\liminf{\qopname\relax n{lim\,inf}}
+% \def\limsup{\qopname\relax n{lim\,sup}}
+% \def\ln{\qopname\relax{no}{ln}}
+% \def\log{\qopname\relax{no}{log}}
+% \def\max{\qopname\relax n{max}}
+% \def\min{\qopname\relax n{min}}
+% \def\Pr{\qopname\relax n{Pr}}
+% \def\projlim{\qopname\relax n{proj\,lim}}
+% \def\sup{\qopname\relax n{sup}}
 
 end
