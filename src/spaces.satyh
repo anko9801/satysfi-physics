@@ -1,0 +1,76 @@
+% azmath/spaces.satyh
+%
+% 間隔が挿入されるコマンド群
+
+@require: math
+type math-kern = length -> length -> length
+
+module AZMathSymbols : sig
+
+  direct \thinspace     : [] math-cmd
+  direct \medspace      : [] math-cmd
+  direct \thickspace    : [] math-cmd
+  direct \space         : [] math-cmd
+
+  direct \negthinspace  : [] math-cmd
+  direct \negmedspace   : [] math-cmd
+  direct \negthickspace : [] math-cmd
+  direct \negspace      : [] math-cmd
+
+  direct \quad          : [] math-cmd
+  direct \qquad         : [] math-cmd
+
+  direct \implies       : [] math-cmd
+  direct \impliedby     : [] math-cmd
+
+  direct \iint          : [] math-cmd
+  direct \iiint         : [] math-cmd
+
+end = struct
+
+  let mu n = 1pt *' n
+  let em n = 18pt *' n
+
+  let-math \thinspace     = text-in-math MathOrd (fun ctx -> inline-skip (mu 3.0))
+  let-math \medspace      = text-in-math MathOrd (fun ctx -> inline-skip (mu 4.0))
+  let-math \thickspace    = text-in-math MathOrd (fun ctx -> inline-skip (mu 5.0))
+  let-math \space         = text-in-math MathOrd (fun ctx -> inline-skip (mu 6.0))
+
+  let-math \negthinspace  = text-in-math MathOrd (fun ctx -> inline-skip (mu (0.0-.3.0)))
+  let-math \negmedspace   = text-in-math MathOrd (fun ctx -> inline-skip (mu (0.0-.4.0)))
+  let-math \negthickspace = text-in-math MathOrd (fun ctx -> inline-skip (mu (0.0-.5.0)))
+  let-math \negspace      = text-in-math MathOrd (fun ctx -> inline-skip (mu (0.0-.6.0)))
+
+  let-math \quad          = text-in-math MathOrd (fun ctx -> inline-skip (em 1.0))
+  let-math \qquad         = text-in-math MathOrd (fun ctx -> inline-skip (em 2.0))
+
+  % let-inline \vspace e =
+  % \vfill \hspace
+  % let-inline \hfill = inline-fil
+
+  let-math \qquad         = let size ctx =
+    let fsize = get-font-size ctx in
+    let margin = fsize /' 1.0pt in
+    read-inline ctx (embed-string(show-float(margin)))
+  in
+  text-in-math MathOrd size
+
+  let-math \implies   = ${\thickspace\Longrightarrow\thickspace}
+  let-math \impliedby = ${\thickspace\Longleftarrow\thickspace}
+
+  let-math \Hom = math-char MathOp `Hom`
+  let-math \Aut = math-char MathOp `Aut`
+  let-math \bmod = math-char MathOp `mod`
+  % \int \oint \bigcap \bigcup \bigodot \bigoplus \bigotimes \bigsqcup \biguplus \bigvee \bigwedge \coprod \prod \smallint \sum
+  % \iint \iiint \iiiint \idotsint \oiint \varoiint \sqint \sqiint
+
+  let-math \pmod = math-char-with-kern MathOp `mod`
+
+  let-math \oint = ${\int}
+  let-math \iint = ${\int\negspace\negspace\int}
+  let-math \iiint = ${\int\negspace\negspace\int\negspace\negspace\int}
+  let-math \iiiint = ${\int\negspace\negspace\int\negspace\negspace\int\negspace\negspace\int}
+  let-math \idotsint = ${\int\ldots\negspace\negspace\int}
+
+end
+
