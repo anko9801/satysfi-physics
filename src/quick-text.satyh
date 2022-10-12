@@ -2,32 +2,60 @@
 % Quick quad text
 
 @require: math
+@import: spaces
 
-module Physics : sig
+module PhysicsQuickText : sig
+
+  direct \qq     : [inline-text;] math-cmd
+  direct \qqtext : [inline-text;] math-cmd
+  direct \qcomma     : [] math-cmd
+  direct \qc         : [] math-cmd
+  direct \qif        : [] math-cmd
+  direct \qthen      : [] math-cmd
+  direct \qelse      : [] math-cmd
+  direct \qotherwise : [] math-cmd
+  direct \qunless    : [] math-cmd
+  direct \qgiven     : [] math-cmd
+  direct \qusing     : [] math-cmd
+  direct \qassume    : [] math-cmd
+  direct \qsince     : [] math-cmd
+  direct \qlet       : [] math-cmd
+  direct \qfor       : [] math-cmd
+  direct \qall       : [] math-cmd
+  direct \qeven      : [] math-cmd
+  direct \qodd       : [] math-cmd
+  direct \qinteger   : [] math-cmd
+  direct \qand       : [] math-cmd
+  direct \qor        : [] math-cmd
+  direct \qas        : [] math-cmd
+  direct \qin        : [] math-cmd
+  direct \qcc        : [] math-cmd
 
 end = struct
 
-  % let-math \qq text = ${#text}
-  % let-math \qc = ${,}
-  % let-math \qcc = ${c.c.}
-  % let-math \qif = ${if}
-  % let-math \qthen = ${}
-  % let-math \qelse = ${}
-  % let-math \qotherwise = ${}
-  % let-math \qunless = ${}
-  % let-math \qgiven = ${}
-  % let-math \qusing = ${}
-  % let-math \qassume = ${}
-  % let-math \qsince = ${}
-  % let-math \qlet = ${}
-  % let-math \qfor = ${}
-  % let-math \qall = ${}
-  % let-math \qeven = ${}
-  % let-math \qodd = ${}
-  % let-math \qinteger = ${}
-  % let-math \qand = ${}
-  % let-math \qor = ${}
-  % let-math \qas = ${}
-  % let-math \qin = ${}
+  let-math \qq m = ${\quad\text!{m}\quad}
+  let-math \qqtext m = ${\quad\text!{m}\quad}
+  let-math \qcomma = ${,\quad}
+  let-math \qc = ${,\quad}
+  let-math \qif = ${\quad\text!{(if)}\quad}
+  let-math \qthen = ${\quad\text!{(then)}\quad}
+  let-math \qelse = ${\quad\text!{(else)}\quad}
+  let-math \qotherwise = ${\quad\text!{(otherwise)}\quad}
+  let-math \qunless = ${\quad\text!{(unless)}\quad}
+  let-math \qgiven = ${\quad\text!{(given)}\quad}
+  let-math \qusing = ${\quad\text!{(using)}\quad}
+  let-math \qassume = ${\quad\text!{(assume)}\quad}
+  let-math \qsince = ${\quad\text!{(since)}\quad}
+  let-math \qlet = ${\quad\text!{(let)}\quad}
+  let-math \qfor = ${\quad\text!{(for)}\quad}
+  let-math \qall = ${\quad\text!{(all)}\quad}
+  let-math \qeven = ${\quad\text!{(even)}\quad}
+  let-math \qodd = ${\quad\text!{(odd)}\quad}
+  let-math \qinteger = ${\quad\text!{(integer)}\quad}
+  let-math \qand = ${\quad\text!{(and)}\quad}
+  let-math \qor = ${\quad\text!{(or)}\quad}
+  let-math \qas = ${\quad\text!{(as)}\quad}
+  let-math \qin = ${\quad\text!{(in)}\quad}
+  let-math \qcc = ${\quad\text!{(c.c.)}\quad}
 
 end
