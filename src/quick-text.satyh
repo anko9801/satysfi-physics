@@ -30,6 +30,7 @@ module PhysicsQuickText : sig
   direct \qas        : [] math-cmd
   direct \qin        : [] math-cmd
   direct \qcc        : [] math-cmd
+  direct \qst        : [] math-cmd
 
 end = struct
 
@@ -37,25 +38,26 @@ end = struct
   let-math \qqtext m = ${\quad\text!{m}\quad}
   let-math \qcomma = ${,\quad}
   let-math \qc = ${,\quad}
-  let-math \qif = ${\quad\text!{(if)}\quad}
-  let-math \qthen = ${\quad\text!{(then)}\quad}
-  let-math \qelse = ${\quad\text!{(else)}\quad}
-  let-math \qotherwise = ${\quad\text!{(otherwise)}\quad}
-  let-math \qunless = ${\quad\text!{(unless)}\quad}
-  let-math \qgiven = ${\quad\text!{(given)}\quad}
-  let-math \qusing = ${\quad\text!{(using)}\quad}
-  let-math \qassume = ${\quad\text!{(assume)}\quad}
-  let-math \qsince = ${\quad\text!{(since)}\quad}
-  let-math \qlet = ${\quad\text!{(let)}\quad}
-  let-math \qfor = ${\quad\text!{(for)}\quad}
-  let-math \qall = ${\quad\text!{(all)}\quad}
-  let-math \qeven = ${\quad\text!{(even)}\quad}
-  let-math \qodd = ${\quad\text!{(odd)}\quad}
-  let-math \qinteger = ${\quad\text!{(integer)}\quad}
-  let-math \qand = ${\quad\text!{(and)}\quad}
-  let-math \qor = ${\quad\text!{(or)}\quad}
-  let-math \qas = ${\quad\text!{(as)}\quad}
-  let-math \qin = ${\quad\text!{(in)}\quad}
-  let-math \qcc = ${\quad\text!{(c.c.)}\quad}
+  let-math \qif = ${\quad\text!{if}\quad}
+  let-math \qthen = ${\quad\text!{then}\quad}
+  let-math \qelse = ${\quad\text!{else}\quad}
+  let-math \qotherwise = ${\quad\text!{otherwise}\quad}
+  let-math \qunless = ${\quad\text!{unless}\quad}
+  let-math \qgiven = ${\quad\text!{given}\quad}
+  let-math \qusing = ${\quad\text!{using}\quad}
+  let-math \qassume = ${\quad\text!{assume}\quad}
+  let-math \qsince = ${\quad\text!{since}\quad}
+  let-math \qlet = ${\quad\text!{let}\quad}
+  let-math \qfor = ${\quad\text!{for}\quad}
+  let-math \qall = ${\quad\text!{all}\quad}
+  let-math \qeven = ${\quad\text!{even}\quad}
+  let-math \qodd = ${\quad\text!{odd}\quad}
+  let-math \qinteger = ${\quad\text!{integer}\quad}
+  let-math \qand = ${\quad\text!{and}\quad}
+  let-math \qor = ${\quad\text!{or}\quad}
+  let-math \qas = ${\quad\text!{as}\quad}
+  let-math \qin = ${\quad\text!{in}\quad}
+  let-math \qcc = ${\quad\text!{c.c.}\quad}
+  let-math \qst = ${\quad\text!{s.t.}\quad}
 
 end

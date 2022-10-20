@@ -20,6 +20,7 @@ module AZMathSymbols : sig
   direct \quad          : [] math-cmd
   direct \qquad         : [] math-cmd
 
+  direct \iff           : [] math-cmd
   direct \implies       : [] math-cmd
   direct \impliedby     : [] math-cmd
 
@@ -55,6 +56,7 @@ end = struct
   in
   text-in-math MathOrd size
 
+  let-math \iff       = ${\thickspace\Longleftrightarrow\thickspace}
   let-math \implies   = ${\thickspace\Longrightarrow\thickspace}
   let-math \impliedby = ${\thickspace\Longleftarrow\thickspace}
 
